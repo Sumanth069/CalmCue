@@ -26,6 +26,6 @@ Features
     View and delete past entries.
     Entries are saved in localStorage and persist across sessions.
 
-6.Meditation Space
+6. Meditation Space
     Set customizable Meditation timer.
     Uses soothing voice tones, controlled speed, and background ambient sounds to help users relax 

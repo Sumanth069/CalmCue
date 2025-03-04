@@ -10,7 +10,7 @@ let voices = [];
 let isPaused = false;
 let pausedCharIndex = 0;
 
-// Load available voices
+
 function loadVoices() {
   voices = window.speechSynthesis.getVoices();
   languageSelect.innerHTML = voices
@@ -18,19 +18,19 @@ function loadVoices() {
     .join('');
 }
 
-// Set the selected voice
+
 function setVoice() {
   speech.voice = voices[languageSelect.value];
 }
 
-// Read text aloud
+
 function readText() {
   if (ttsInput.value.trim() === '') {
     alert('Please enter some text or upload a file.');
     return;
   }
 
-  window.speechSynthesis.cancel(); // Stop any ongoing speech first
+  window.speechSynthesis.cancel(); 
 
   if (isPaused) {
     speech.text = ttsInput.value.slice(pausedCharIndex);
@@ -46,14 +46,14 @@ function readText() {
   isPaused = false;
 }
 
-// Fix for real-time text highlighting
+
 speech.onboundary = (event) => {
   const text = ttsInput.value;
-  pausedCharIndex = event.charIndex; // Update position of spoken text
+  pausedCharIndex = event.charIndex;
 
   let before = text.substring(0, pausedCharIndex);
   let after = text.substring(pausedCharIndex);
-  let match = after.match(/\S+/); // Match next word
+  let match = after.match(/\S+/); 
 
   if (match) {
     let currentWord = match[0];

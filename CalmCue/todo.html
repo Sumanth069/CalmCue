@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #eef2f3, #90cd9b);
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1, h2 {
+      font-weight: bold;
+    }
+
+    #todo-form {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    #todo-input {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      flex: 1;
+      font-size: 16px;
+    }
+
+    button {
+      background: #ff6b6b;
+      border: none;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: #ff4747;
+      transform: scale(1.05);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: rgba(255, 255, 255, 0.4);
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .delete-btn {
+      background: #e63946;
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background: #c02633;
+    }
+
+    footer {
+      margin-top: 30px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      font-size: 14px;
+      font-weight: 300;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>CalmCue</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="todo">
+    <div class="container">
+      <h2>Your To-Do List</h2>
+      <form id="todo-form">
+        <input type="text" id="todo-input" placeholder="Add a new task...">
+        <button type="submit">Add</button>
+      </form>
+      <ul id="todo-list"></ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; CalmCue. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("todo-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const input = document.getElementById("todo-input");
+      const taskText = input.value.trim();
+      if (taskText !== "") {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `${taskText} <button class='delete-btn'>Delete</button>`;
+        document.getElementById("todo-list").appendChild(listItem);
+        input.value = "";
+      }
+    });
+
+    document.getElementById("todo-list").addEventListener("click", function(event) {
+      if (event.target.classList.contains("delete-btn")) {
+        event.target.parentElement.remove();
+      }
+    });
+  </script>
+</body>
+</html>

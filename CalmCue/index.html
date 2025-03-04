@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalmCue</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #1abc9c, #3498db);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px 0;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffcc00;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 70vh;
+      background: url('background.jpg') center/cover no-repeat;
+      padding: 50px 20px;
+      box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-content {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-content h2 {
+      font-size: 2.5em;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .feature-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .feature-buttons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 160px;
+      height: 60px;
+      text-align: center;
+      background-color: #ff6b6b;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 12px;
+      margin: 10px;
+      padding: 10px;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, background-color 0.3s;
+    }
+
+    .feature-buttons a:hover {
+      background-color: #ff4757;
+      transform: translateY(-5px);
+      box-shadow: 3px 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    footer {
+      margin-top: 30px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      font-size: 14px;
+      font-weight: 300;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>CalmCue</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h2>Welcome to CalmCue</h2>
+        <p>Your digital assistant for focus, productivity, and mindfulness.</p>
+        <div class="feature-buttons">
+          <a href="tts.html">Text-to-Speech</a>
+          <a href="focus-timer.html">Focus Timer</a>
+          <a href="mood-detector.html">Mood Matcher</a>
+          <a href="todo.html">To-Do List</a>
+          <a href="dairy.html">My Diary</a>
+          <a href="meditation.html">Meditate</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 CalmCue. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

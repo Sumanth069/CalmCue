@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditation</title>
+    <link rel="stylesheet" href="styles.css">
+    <header>
+        <div class="container">
+          <h1>CalmCue</h1>
+          <nav>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="resources.html">Resources</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 20px; 
+            background: #cfe8fc;
+        }
+        #meditation-container { 
+            max-width: 500px; 
+            margin: auto; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button { 
+            margin-top: 10px; 
+            padding: 12px; 
+            background: #28a745; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        #meditation-text {
+            font-size: 20px;
+            color: #555;
+            margin-top: 10px;
+        }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #333;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="meditation-container">
+        <h2>🧘 Meditation</h2>
+        <p id="meditation-text">Enter meditation time (in minutes) and click start.</p>
+        <input type="number" id="custom-time" placeholder="Enter minutes" min="1" max="60">
+        <p id="timer">0:00</p>
+        <button onclick="startMeditation()">Start Meditation</button>
+        <button onclick="pauseMeditation()">Pause Meditation</button>
+        <button onclick="resetMeditation()">Reset Meditation</button>
+        <audio id="meditation-music" loop>
+            <source src="meditation-music.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        let timerInterval;
+        let music = document.getElementById("meditation-music");
+        let remainingTime = 0;
+        let isPaused = false;
+
+        function startMeditation() {
+            if (!isPaused) {
+                let minutesInput = document.getElementById("custom-time").value;
+                remainingTime = parseInt(minutesInput) * 60;
+                if (isNaN(remainingTime) || remainingTime <= 0) {
+                    alert("Please enter a valid time in minutes.");
+                    return;
+                }
+            }
+            isPaused = false;
+            document.getElementById("meditation-text").innerText = "Relax... Breathe in... Breathe out... Stay present...";
+            document.body.style.background = "#b0e0a8";
+            runTimer();
+            music.play();
+        }
+
+        function pauseMeditation() {
+            clearInterval(timerInterval);
+            isPaused = true;
+            music.pause();
+        }
+
+        function resetMeditation() {
+            clearInterval(timerInterval);
+            remainingTime = 0;
+            document.getElementById("timer").innerText = "0:00";
+            document.getElementById("meditation-text").innerText = "Enter meditation time (in minutes) and click start.";
+            document.body.style.background = "#cfe8fc";
+            music.pause();
+            music.currentTime = 0;
+            isPaused = false;
+        }
+
+        function runTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(function () {
+                if (remainingTime > 0) {
+                    let minutes = parseInt(remainingTime / 60, 10);
+                    let seconds = parseInt(remainingTime % 60, 10);
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+                    document.getElementById("timer").innerText = minutes + ":" + seconds;
+                    remainingTime--;
+                } else {
+                    clearInterval(timerInterval);
+                    document.getElementById("meditation-text").innerText = "You are calm and stress-free.";
+                    document.body.style.background = "#cfe8fc";
+                    music.pause();
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
+
+<footer>
+    <div class="container">
+      <p>&copy;CalmCue. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="mood-detector.js"></script>
+</body>
+</html>

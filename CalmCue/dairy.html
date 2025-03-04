@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Diary</title>
+    <link rel="stylesheet" href="styles.css">
+    <header>
+        <div class="container" style="background: linear-gradient(135deg, #2c3e50, #4ca1af); padding: 15px; border-radius: 5px;">
+          <h1 style="color: white;">CalmCue</h1>
+          <nav>
+            <ul>
+              <li><a href="index.html" style="color: white;">Home</a></li>
+              <li><a href="resources.html" style="color: white;">Resources</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 20px; 
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: #ffffff;
+        }
+        #diary-container { 
+            max-width: 500px; 
+            margin: auto; 
+            background: #ffffff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+        textarea { 
+            width: 100%; 
+            height: 120px; 
+            margin-top: 10px; 
+            padding: 10px; 
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+        button { 
+            margin-top: 10px; 
+            padding: 12px; 
+            background: #1abc9c; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #16a085;
+        }
+        .entry { 
+            background: #ecf0f1; 
+            padding: 10px; 
+            margin-top: 10px; 
+            border-radius: 5px; 
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .entry strong {
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            #diary-container {
+                width: 90%;
+            }
+        }
+        footer {
+            margin-top: 30px;
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div id="diary-container">
+        <h2>📖 My Diary</h2>
+        <textarea id="entry" placeholder="Write your thoughts..."></textarea>
+        <button onclick="saveEntry()">Save Entry</button>
+        <h3>Previous Entries</h3>
+        <div id="entries"></div>
+    </div>
+
+    <script>
+        function saveEntry() {
+            let text = document.getElementById("entry").value;
+            if (text.trim() === "") return;
+            let date = new Date().toLocaleString();
+            let entry = { text, date };
+            
+            let entries = JSON.parse(localStorage.getItem("diary")) || [];
+            entries.unshift(entry);
+            localStorage.setItem("diary", JSON.stringify(entries));
+            
+            document.getElementById("entry").value = "";
+            loadEntries();
+        }
+
+        function loadEntries() {
+            let entries = JSON.parse(localStorage.getItem("diary")) || [];
+            let entryDiv = document.getElementById("entries");
+            entryDiv.innerHTML = "";
+            entries.forEach(entry => {
+                let div = document.createElement("div");
+                div.className = "entry";
+                div.innerHTML = `<strong>${entry.date}</strong><p>${entry.text}</p>`;
+                entryDiv.appendChild(div);
+            });
+        }
+        
+        loadEntries();
+    </script>
+</body>
+</html>
+
+<footer>
+    <div class="container">
+      <p>&copy; CalmCue. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="mood-detector.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalmCue</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #d4e7c5, #81b29a);
+            color: rgb(0, 0, 0);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            font-weight: bold;
+        }
+
+        .timer-controls input {
+            padding: 5px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            width: 60px;
+            font-size: 16px;
+        }
+
+        .timer-buttons button {
+            background: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 12px 18px;
+            margin: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .timer-buttons button:hover {
+            background: #ff4747;
+            transform: scale(1.05);
+        }
+
+        #timer {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        #progress-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        #progress {
+            width: 0%;
+            height: 100%;
+            background: #4caf50;
+            transition: width 0.5s ease-in-out;
+        }
+
+        footer {
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>CalmCue</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="focus-timer">
+    <div class="container">
+        <h2>Focus Timer</h2>
+        <div class="timer-controls">
+            <label for="focus-time">Focus Time (minutes):</label>
+            <input type="number" id="focus-time" value="25" min="1">
+            <label for="break-time">Break Time (minutes):</label>
+            <input type="number" id="break-time" value="5" min="1">
+        </div>
+        <div id="timer">25:00</div>
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+        <div class="timer-buttons">
+            <button id="start-timer">Start</button>
+            <button id="pause-timer">Pause</button>
+            <button id="reset-timer">Reset</button>
+        </div>
+        <div id="rounds">Rounds Completed: <span id="round-count">0</span></div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 CalmCue. All rights reserved.</p>
+    </div>
+</footer>
+
+<audio id="focus-start-sound" src="focus-start.mp3"></audio>
+<audio id="break-start-sound" src="break-start.mp3"></audio>
+<audio id="timer-end-sound" src="timer-end.mp3"></audio>
+
+<script>
+    let timer;
+    let totalTime;
+    let remainingTime;
+    let isPaused = false;
+    let hasStarted = false;
+    let roundCount = 0;
+
+    function startTimer() {
+        if (!hasStarted) {
+            const focusTime = parseInt(document.getElementById("focus-time").value) * 60;
+            totalTime = focusTime;
+            remainingTime = focusTime;
+            hasStarted = true;
+            document.getElementById("focus-start-sound").play();
+        }
+        isPaused = false;
+        runTimer();
+    }
+
+    function runTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+            if (!isPaused && remainingTime > 0) {
+                remainingTime--;
+                updateTimerDisplay();
+                updateProgressBar();
+            } else if (remainingTime === 0) {
+                clearInterval(timer);
+                document.getElementById("timer-end-sound").play();
+                roundCount++;
+                document.getElementById("round-count").textContent = roundCount;
+                switchToBreak();
+            }
+        }, 1000);
+    }
+
+    function switchToBreak() {
+        const breakTime = parseInt(document.getElementById("break-time").value) * 60;
+        totalTime = breakTime;
+        remainingTime = breakTime;
+        document.getElementById("break-start-sound").play();
+        runTimer();
+    }
+
+    function pauseTimer() {
+        isPaused = true;
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        hasStarted = false;
+        remainingTime = parseInt(document.getElementById("focus-time").value) * 60;
+        updateTimerDisplay();
+        document.getElementById("progress").style.width = "0%";
+    }
+
+    function updateTimerDisplay() {
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        document.getElementById("timer").textContent = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+    }
+
+    function updateProgressBar() {
+        const progressPercent = ((totalTime - remainingTime) / totalTime) * 100;
+        document.getElementById("progress").style.width = progressPercent + "%";
+    }
+
+    document.getElementById("start-timer").addEventListener("click", startTimer);
+    document.getElementById("pause-timer").addEventListener("click", pauseTimer);
+    document.getElementById("reset-timer").addEventListener("click", resetTimer);
+</script>
+
+</body>
+</html>

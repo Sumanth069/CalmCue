@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Matcher</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #18db60, #90cd9b);
+      color: rgb(0, 0, 0);
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px 0;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      margin: 0;
+      color: white;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffcc00;
+    }
+    .mood-options button {
+      background: #ff6b6b;
+      border: none;
+      color: white;
+      padding: 15px 20px;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.2em;
+      font-weight: bold;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    .mood-options button:hover {
+      background: #ff8787;
+      transform: scale(1.1);
+    }
+    #song-suggestion {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      display: none;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    iframe {
+      width: 100%;
+      border-radius: 10px;
+    }
+    footer {
+      margin-top: 30px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 0;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>CalmCue</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="mood-detector">
+    <div class="container">
+      <h2>Mood Matcher</h2>
+      <p>Select your mood, and we'll suggest a song for you!</p>
+      <div class="mood-options">
+        <button data-mood="happy">😊 Happy</button>
+        <button data-mood="sad">😢 Sad</button>
+        <button data-mood="energetic">💪 Energetic</button>
+        <button data-mood="calm">🧘 Calm</button>
+      </div>
+      <div id="song-suggestion">
+        <h3>Suggested Song</h3>
+        <div id="youtube-player"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; CalmCue. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const moodSongs = {
+      happy: "https://www.youtube.com/embed/d-diB65scQU",
+      sad: "https://www.youtube.com/embed/KG_P2VJqPzE",
+      energetic: "https://www.youtube.com/embed/ZbZSe6N_BXs",
+      calm: "https://www.youtube.com/embed/2Xc9gXyf2G4"
+    };
+
+    document.querySelectorAll(".mood-options button").forEach(button => {
+      button.addEventListener("click", function() {
+        const mood = this.getAttribute("data-mood");
+        const songUrl = moodSongs[mood];
+        if (songUrl) {
+          document.getElementById("youtube-player").innerHTML = `<iframe width="560" height="315" src="${songUrl}" frameborder="0" allowfullscreen></iframe>`;
+          document.getElementById("song-suggestion").style.display = "block";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

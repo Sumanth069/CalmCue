@@ -1,0 +1,247 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Header */
+  header {
+    background: #103d8f;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Hero Section */
+  .hero {
+    background: #e0f7fa;
+    padding: 100px 0;
+    text-align: center;
+  }
+  
+  .hero-content h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  
+  .feature-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .feature-button {
+    background: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .feature-button:hover {
+    background: #45a049;
+    transform: translateY(-5px);
+  }
+  
+  /* Footer */
+  footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+  }
+
+  /* Text-to-Speech Tool Styles */
+.tts-tool {
+    padding: 40px 0;
+    background: #e0f7fa;
+  }
+  
+  .tts-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  #tts-input {
+    width: 100%;
+    height: 200px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    resize: vertical;
+  }
+  
+  .tts-options {
+    margin-bottom: 15px;
+  }
+  
+  .tts-options label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .tts-options input[type="range"] {
+    width: 100%;
+  }
+  
+  .tts-options input[type="file"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .tts-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  #tts-button, #tts-stop {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  #tts-button:hover, #tts-stop:hover {
+    background: #45a049;
+  }
+  
+  #tts-stop {
+    background: #f44336;
+  }
+  
+  #tts-stop:hover {
+    background: #e53935;
+  }
+  
+  #highlighted-text {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .highlight {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+  /* To-Do List Styles */
+.todo {
+    padding: 40px 0;
+  }
+  
+  #todo-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #todo-input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  #todo-form button {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  #todo-form button:hover {
+    background: #45a049;
+  }
+  
+  #todo-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #todo-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  #todo-list li button {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  #todo-list li button:hover {
+    background: #e53935;
+  }

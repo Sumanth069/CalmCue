@@ -129,24 +129,6 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById("todo-form").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const input = document.getElementById("todo-input");
-      const taskText = input.value.trim();
-      if (taskText !== "") {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `${taskText} <button class='delete-btn'>Delete</button>`;
-        document.getElementById("todo-list").appendChild(listItem);
-        input.value = "";
-      }
-    });
-
-    document.getElementById("todo-list").addEventListener("click", function(event) {
-      if (event.target.classList.contains("delete-btn")) {
-        event.target.parentElement.remove();
-      }
-    });
-  </script>
+  <script src="todo.js"></script>
 </body>
 </html>

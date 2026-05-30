@@ -10,7 +10,7 @@ function renderTasks() {
     .map((task, index) => `
       <li>
         <span>${task}</span>
-        <button onclick="deleteTask(${index})">Delete</button>
+        <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
       </li>
     `)
     .join('');

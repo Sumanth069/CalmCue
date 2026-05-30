@@ -150,7 +150,7 @@
             totalTime = focusTime;
             remainingTime = focusTime;
             hasStarted = true;
-            document.getElementById("focus-start-sound").play();
+            document.getElementById("focus-start-sound").play().catch(e => console.log("Audio play deferred or failed:", e));
         }
         isPaused = false;
         runTimer();
@@ -165,7 +165,7 @@
                 updateProgressBar();
             } else if (remainingTime === 0) {
                 clearInterval(timer);
-                document.getElementById("timer-end-sound").play();
+                document.getElementById("timer-end-sound").play().catch(e => console.log("Audio play deferred or failed:", e));
                 roundCount++;
                 document.getElementById("round-count").textContent = roundCount;
                 switchToBreak();
@@ -177,7 +177,7 @@
         const breakTime = parseInt(document.getElementById("break-time").value) * 60;
         totalTime = breakTime;
         remainingTime = breakTime;
-        document.getElementById("break-start-sound").play();
+        document.getElementById("break-start-sound").play().catch(e => console.log("Audio play deferred or failed:", e));
         runTimer();
     }
 

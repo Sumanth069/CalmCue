@@ -121,24 +121,6 @@
     </div>
   </footer>
 
-  <script>
-    const moodSongs = {
-      happy: "https://www.youtube.com/embed/d-diB65scQU",
-      sad: "https://www.youtube.com/embed/KG_P2VJqPzE",
-      energetic: "https://www.youtube.com/embed/ZbZSe6N_BXs",
-      calm: "https://www.youtube.com/embed/2Xc9gXyf2G4"
-    };
-
-    document.querySelectorAll(".mood-options button").forEach(button => {
-      button.addEventListener("click", function() {
-        const mood = this.getAttribute("data-mood");
-        const songUrl = moodSongs[mood];
-        if (songUrl) {
-          document.getElementById("youtube-player").innerHTML = `<iframe width="560" height="315" src="${songUrl}" frameborder="0" allowfullscreen></iframe>`;
-          document.getElementById("song-suggestion").style.display = "block";
-        }
-      });
-    });
-  </script>
+  <script src="mood-detector.js"></script>
 </body>
 </html>
